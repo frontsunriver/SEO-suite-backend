@@ -1,12 +1,11 @@
 const {User} = require('../models/User');
-
+const crypto = require('crypto');
+var md5sum = crypto.createHash('md5');
 exports.signin = function(req, res){
     const email = req.body.email;
-    const password = req.body.password;
+    const password = crypto.createHash('md5').update(req.body.password).digest('hex');
     User.findOne({ email: email })
     .then(users => {
-        // const user = JSON.stringify(users);
-        console.log(users);
         if(users) {
             if(users.password == password) {
                 res.send({status:200, msg: "success"});
@@ -22,9 +21,8 @@ exports.signin = function(req, res){
 exports.signup = function(req, res, next) {
     const username = req.body.username;
     const email = req.body.email;
-    const password = req.body.password;
+    const password = crypto.createHash('md5').update(req.body.password).digest('hex');
     const address = req.body.address;
-    console.log(req.body);
     if (!email || !password) {
       return res.status(422).send({ error: 'You must provide email and password'});
     }

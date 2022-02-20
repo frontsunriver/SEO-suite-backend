@@ -82,7 +82,7 @@ exports.get = function(req, res, next) {
             console.log(err);
         }
         else {
-            res.json(lists);
+            res.send({status:"true",data:lists});
         }
     });
 }

@@ -1,6 +1,7 @@
 const userController = require('../controllers/UserController');
 const workspaceController = require('../controllers/WorkspaceController');
 const planController = require('../controllers/PlanController');
+const dashboardController = require('../controllers/DashboardController');
 
 module.exports = (app) => {
     app.post('/signin', userController.signin);
